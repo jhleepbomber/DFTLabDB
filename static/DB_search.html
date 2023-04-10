@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+
+    var N_run, N_run_curr;
+
+    var Run_i;
+
+    var User_path;
+    var Run_mode;
+
+    var timerId;
+  
+    var fdf_text ;
+
+    function form_submit()
+    {
+        document.getElementById('id_field_info').value =  parent.document.getElementById('id_hidden_info_field').value ;  
+        document.getElementById('id_search_text').value =  parent.document.getElementById('id_search_text').value ;  
+
+        document.getElementById("id_button_form").submit();
+    }
+
+
+    function Initialize(F_mod, N_db)
+    {      
+        var R_string = document.getElementById('id_receive').value;
+        
+        if (F_mod==1) 
+        {
+            
+            parent.make_DBtable(N_db);
+            parent.clear_contents();
+
+            //console.log(document.getElementById('id_db_result').value);
+
+        }
+        
+        parent.document.getElementById("id_N_DB").innerHTML = N_db;
+
+      
+
+      
+
+    }
+    
+    
+</script>
+
+    <title>Document</title>
+
+</head>
+<body onload ='Initialize({{F_mod}}, {{N_db}})'>   
+   
+    <!-- <button id = "id_Run_button" value = "Run" style='width: 100px;' onclick = 'form_submit()'>Search</button> -->
+    <form id="id_button_form" action = "http://platinum.kaist.ac.kr:80/SearchDB" method = "POST">
+      
+    <textarea id='id_field_info' name='field_info' style='display:none;'> </textarea>  
+
+    <input type = "text" id="id_search_text" name='search_text' style='display:none;' >
+    
+   
+
+    </form>
+
+
+    <input type = "text" id="id_receive" value ='{{Run_mode}}-/-{{work_dir}}' style='display:none;' >
+
+    <textarea id='id_db_result' style='display:none;'> {{db_result}} </textarea>  
+   
+  
+</body>
+</html>
