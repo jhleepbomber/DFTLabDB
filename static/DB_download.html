@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+
+    var N_run, N_run_curr;
+
+    var Run_i;
+
+    var User_path;
+    var Run_mode;
+
+    var timerId;
+  
+    var fdf_text ;
+
+
+    function make_zip()
+    {
+        var Newpath = parent.document.getElementById('id_hidden_SelNewPath').value;
+
+
+        
+
+        document.getElementById('id_NewPath_info').value =  Newpath ;  
+        document.getElementById("id_form").submit();
+    }
+
+    function Initialize(F_mod)
+    {      
+
+        // download link -----------------------------------------------------------------
+        
+        document.getElementById('id_download_result').href = parent.document.getElementById('id_hidden_Download_link').value;	
+
+        if (F_mod=='1') 
+        {
+
+
+            document.getElementById("id_Download").click();
+ 
+        }
+ 
+    }
+    
+    
+</script>
+
+    <title>Document</title>
+
+</head>
+<body onload ="Initialize('{{F_mod}}')">   
+   
+    <!-- <button id = "id_Run_button" value = "Run" style='width: 100px;' onclick = 'form_submit()'>Search</button> -->
+    <form id="id_form" action = "http://platinum.kaist.ac.kr:80/Download" method = "POST">
+      
+    <textarea id='id_NewPath_info' name='NewPath_info' style='display:none;'> </textarea>  
+   
+    </form>
+
+    <a id ="id_download_result" href="" download> <button id= "id_Download" style='display:none;' >Download</button> </a> 
+   
+  
+</body>
+</html>

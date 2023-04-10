@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>SIESTA IO for class EE488(A) - Webinterface for SIESTA</title>
+        <!-- Favicon-->
+      
+        <!-- Bootstrap icons-->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" /> -->
+        <!-- Core theme CSS (includes Bootstrap)-->
+
+        <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+        <link href="/static/css/styles.css" rel="stylesheet" />  
+        
+        <!-- <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script> -->
+         <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script> 
+<script>
+
+var win = new Array(10); 
+
+function create_window(wi)
+{
+    let today = new Date();
+
+    var win_name = "Child_win" + String(wi) ; 
+
+    var html_string = new Array(10);
+    
+    win[wi] = window.open("", win_name, "width=1250,height=1400");    
+
+
+    const request = new XMLHttpRequest();
+    const url = '/static/htmls/LabDB_ini.html'; // 긁어오고 싶은 주소를 넣는다. 예제는 네이버
+
+    request.open('GET', url, true);
+    request.onload = function () {
+    //console.log(request.responseText); // 긁어온 내용 뿌리기
+    win[wi].document.write(request.responseText);
+    };
+ 
+
+
+request.send();
+
+   
+}
+
+
+function Apply()
+{    
+
+    document.getElementById("id_id_info").value   = document.getElementById("id_id_text").value;
+    document.getElementById("id_pass_info").value = document.getElementById("id_pass_text").value;            
+    document.getElementById("id_Register_ID_SIESTA").submit();
+
+}
+
+</script>        
+
+
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">SIESTA IO for class EE488(A)</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Pseudo potentials</a></li>
+                                <li><a class="dropdown-item" href="#!">SIESTA</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+
+                    </ul>
+                  
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-0">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">SIESTA IO for class EE488(A)</h1>
+                    <p class="lead fw-normal text-white-50 mb-0"> Webinterface for SIESTA</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-1">
+              
+                    <div class="col mb-1 " >
+                           
+                                <div class="text-center">
+
+                                    <h2>Dear {{id_text}}</h2>                                     
+
+                                    <h2>Thank you very much</h2>                                     
+                                    <br>
+                                    <a href="/static/Login_DB_ini.html">  Go to login page </a>                                    
+                                  
+                                </div>
+                    </div>
+            </div>
+
+
+        </section>
+
+        
+
+        <!-- Footer-->
+        <footer class="py-1 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white"> Prof. Yong-Hoon Kim lab </p></div>
+        </footer>
+      
+      
+    </body>
+</html>

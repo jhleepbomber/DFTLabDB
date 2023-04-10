@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flask-Dropzone Demo: Basic</title>
+  <link rel="stylesheet" href="/static/css/Dropzone/dropzone.min.css" type="text/css">  
+  <style>
+.dropzone{border: 2px dashed #0087F7; margin: 0%; min-height: 0px; height: 120px; width: 150px;}
+</style>
+
+<script src="/static/js/dropzone.min.js"></script>
+
+<script>
+  Dropzone.options.myDropzone = {
+    init: function() {
+
+          this.on("drop", function(file) { 
+              init_dropzone(); 
+            });
+
+    },
+      // click upload options
+    uploadMultiple: false,
+    parallelUploads: 2,
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 50000, // MB
+    acceptedFiles: ".zip, .txt",
+    maxFiles: 100,
+    dictDefaultMessage: `Drop data here`, // message display on drop area
+    dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
+    dictInvalidFileType: "You can't upload files of this type.",
+    dictFileTooBig: "File is too big {{filesize}}. Max filesize: {{maxFilesize}}MiB.",
+    dictResponseError: "Server error: {{statusCode}}",
+    dictMaxFilesExceeded: "You can't upload any more files.",
+    dictCancelUpload: "Cancel upload",
+    dictRemoveFile: "Remove file",
+    dictCancelUploadConfirmation: "You really want to delete this file?",
+    dictUploadCanceled: "Upload canceled",
+    timeout: null,
+      // custom options code
+  };
+
+  function init_dropzone()
+  {
+
+    Dropzone.forElement("#myDropzone").removeAllFiles(true);
+
+    var usertext = parent.document.getElementById("id_User").innerHTML;
+
+    var arr_user = usertext.split(":");
+
+    var User     = arr_user[1].trim();
+
+    document.getElementById("id_User_text").value = User;
+
+    //Dropzone.options.myDropzone.init();
+
+  }
+
+  function Initialize()
+  {
+
+  }
+  </script>  
+
+</head>
+<body onload="Initialize()">
+  <form action="/uploads" method="post" class="dropzone" id="myDropzone" enctype="multipart/form-data">
+
+    <input id='id_User_text' type='text' name='User_info' style='display:none;' >    
+
+  </form>
+
+  
+</body>
+</html>

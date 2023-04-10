@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+
+var N_run, N_run_curr;
+
+var Run_i;
+
+var User_path;
+var Run_mode;
+
+var timerId;
+
+var fdf_text ;
+
+function form_submit(mod)
+{   
+    var user_str    = parent.document.getElementById("id_User").innerHTML;
+    var Year_str    = parent.document.getElementById("id_Year").value;
+    var Journal_str = parent.document.getElementById("id_Journal").value;
+    var Model_str   = parent.document.getElementById("id_Model").value;
+    var Comment_str = parent.document.getElementById("id_Comment").value;
+    var argout_str  = parent.document.getElementById("id_argout").value;
+
+    Year_str    = Year_str.replace(/ +/g, "_");
+    Year_str    = Year_str.replace(/,+/g, "_");
+    Year_str    = Year_str.replace(/_+/g, "_");
+
+    Journal_str = Journal_str.replace(/ +/g, "_");
+    Journal_str = Journal_str.replace(/,+/g, "_");
+    Journal_str = Journal_str.replace(/_+/g, "_");
+
+    Model_str   = Model_str.replace(/ +/g, "_");
+    Model_str   = Model_str.replace(/,+/g, "_");
+    Model_str   = Model_str.replace(/_+/g, "_");
+
+    Comment_str = Comment_str.replace(/ +/g, "_");
+    Comment_str = Comment_str.replace(/,+/g, "_");
+    Comment_str = Comment_str.replace(/_+/g, "_");
+
+    argout_str  = argout_str.replace(/ +/g, "_");       
+
+    var arr_user = user_str.split(":");
+
+    user_str = arr_user[1].trim();
+
+    document.getElementById("id_curr_User").value = user_str;
+    document.getElementById("id_Year").value      = Year_str;
+    document.getElementById("id_Journal").value   = Journal_str;
+    document.getElementById("id_Model").value     = Model_str;
+    document.getElementById("id_Comment").value   = Comment_str;
+    document.getElementById("id_argout").value    = argout_str;        
+
+    document.getElementById("id_selpath").value = parent.document.getElementById("id_hidden_selpath").value;
+    document.getElementById("id_update_form").submit();
+}
+
+function Initialize(Field_keys, User_List, Year_List, Journal_List, Model_List, program_List, F_mod, selpath, Dir_list)
+{   
+
+    if (F_mod=='1')
+    {
+
+        if (selpath == "") 
+        {
+            parent.document.getElementById("id_updateDB_state").style.fontWeight = "bold";
+            parent.document.getElementById("id_updateDB_state").style.color      = "#0000ff";
+            parent.document.getElementById("id_updateDB_state").innerHTML        = "Updating DB completed";
+        }
+        else
+        {
+            parent.document.getElementById("id_updateDB_state2").style.fontWeight = "bold";
+            parent.document.getElementById("id_updateDB_state2").style.color      = "#0000ff";
+            parent.document.getElementById("id_updateDB_state2").innerHTML        = "Updating DB completed";
+        }
+        parent.Initialize(Field_keys, User_List, Year_List, Journal_List, Model_List, program_List, F_mod, Dir_list);
+
+    }        
+    
+}
+
+    
+</script>
+    <title>Document</title>
+</head>
+
+<body onload ="Initialize('{{keys}}', '{{User_List}}', '{{Year_List}}', '{{Journal_List}}', '{{Model_List}}', '{{program_List}}', '{{F_mod}}', '{{selpath}}', '{{Dir_list}}');">   
+   
+    <!-- <button id = "id_Run_button" value = "Run" style='width: 100px;' onclick = 'form_submit()'>Search</button> -->
+    <form id="id_update_form" action = "http://platinum.kaist.ac.kr:80/Update_DBWeb" method = "POST">
+
+        <input type="text" id= "id_curr_User" name= 'curr_User' value='' style="display:none;" />
+
+        <input type="text" id = "id_Year"     name="Year"    style="display:none;">
+    	<input type="text" id = "id_Journal"  name="Journal" style="display:none;">
+		<input type="text" id = "id_Model"    name="Model"   style="display:none;">
+		<input type="text" id = "id_Comment"  name="Comment" style="display:none;">
+
+        <input type="text" id = "id_argout"   name="argout" style="display:none;">
+
+        <input type="text" id = "id_selpath"   name="selpath" style="display:none;">
+
+    </form>
+   
+  
+</body>
+</html>
